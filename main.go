@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/tidwall/buntdb"
 )
@@ -58,6 +59,9 @@ func main() {
 	})
 
 	r := gin.Default()
+
+	// Serve frontend static files
+	r.Use(static.Serve("/", static.LocalFile("./views", true)))
 
 	// Ping
 	r.GET("/ping", func(c *gin.Context) {
